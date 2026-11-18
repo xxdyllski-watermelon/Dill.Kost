@@ -1,0 +1,72 @@
+/* =========================================================
+   tema.css — gaya latar belakang (bulatan, gradien, aurora, gelombang, titik, foto)
+   dan tampilan halaman Tema. Warna datang dari variabel yang diatur tema.js
+   ========================================================= */
+#bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--bg); transition: background-color .6s; }
+#bg .b { position: absolute; border-radius: 50%; opacity: 0; transition: opacity .8s, background-color .6s, transform 1.2s var(--ease), filter .8s; will-change: transform; }
+#bg .bg-foto { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity .8s; }
+#bg .bg-foto::after { content: ''; position: absolute; inset: 0; background: var(--bg-a); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
+#bg .bg-wave { position: absolute; left: 0; right: 0; bottom: 0; width: 200%; height: 34vh; opacity: 0; fill: var(--blob1); transition: opacity .8s, fill .6s; }
+
+/* --- Bulatan (gaya referensi) --- */
+[data-bg="bulat"] #bg .b { opacity: 1; background: var(--blob1); }
+[data-bg="bulat"] #bg .b1 { width: 360px; height: 360px; top: -120px; left: 6%; }
+[data-bg="bulat"] #bg .b2 { width: 520px; height: 520px; top: -230px; right: -140px; background: var(--blob2); opacity: .75; }
+[data-bg="bulat"] #bg .b3 { width: 320px; height: 320px; bottom: -130px; left: 32%; background: var(--blob3); opacity: .7; }
+[data-bg="bulat"] #bg .b4 { width: 230px; height: 230px; bottom: 12%; right: 6%; }
+[data-bg="bulat"] #bg .b { animation: bgFloat 16s ease-in-out infinite alternate; }
+[data-bg="bulat"] #bg .b2 { animation-duration: 22s; } [data-bg="bulat"] #bg .b3 { animation-duration: 19s; animation-delay: -6s; } [data-bg="bulat"] #bg .b4 { animation-duration: 25s; animation-delay: -9s; }
+
+/* --- Gradien bergerak --- */
+[data-bg="gradien"] #bg { background: linear-gradient(135deg, var(--blob1), var(--bg) 30%, var(--blob2) 60%, var(--blob3) 85%, var(--blob1)); background-size: 300% 300%; animation: gradShift 18s ease-in-out infinite; }
+
+/* --- Aurora --- */
+[data-bg="aurora"] #bg .b { opacity: .5; filter: blur(80px); }
+[data-bg="aurora"] #bg .b1 { width: 55vmax; height: 55vmax; top: -20vmax; left: -10vmax; background: var(--aur1); animation: aurora1 20s ease-in-out infinite alternate; }
+[data-bg="aurora"] #bg .b2 { width: 46vmax; height: 46vmax; top: 10vmax; right: -14vmax; background: var(--aur2); opacity: .45; animation: aurora2 24s ease-in-out infinite alternate; }
+[data-bg="aurora"] #bg .b3 { width: 50vmax; height: 50vmax; bottom: -22vmax; left: 20vmax; background: var(--aur3); opacity: .42; animation: aurora1 28s ease-in-out infinite alternate-reverse; }
+[data-bg="aurora"] #bg .b4 { width: 30vmax; height: 30vmax; top: 40%; left: 40%; background: var(--aur1); opacity: .3; animation: aurora2 30s ease-in-out infinite alternate; }
+[data-mode="dark"][data-bg="aurora"] #bg .b { opacity: .32; }
+
+/* --- Gelombang --- */
+[data-bg="gelombang"] #bg .bg-wave { opacity: 1; animation: waveMove 14s linear infinite; }
+[data-bg="gelombang"] #bg .b1 { opacity: 1; width: 420px; height: 420px; top: -180px; right: -100px; background: var(--blob2); animation: bgFloat 18s ease-in-out infinite alternate; }
+
+/* --- Titik-titik --- */
+[data-bg="titik"] #bg { background-image: radial-gradient(var(--blob1) 2.2px, transparent 2.6px), radial-gradient(var(--blob3) 1.6px, transparent 2px); background-size: 26px 26px, 26px 26px; background-position: 0 0, 13px 13px; background-color: var(--bg); animation: dotsMove 30s linear infinite; }
+
+/* --- Foto --- */
+[data-bg="foto"] #bg .bg-foto.ada { opacity: 1; }
+
+/* --- Transisi halus saat ganti tema --- */
+html.theme-anim body, html.theme-anim .card, html.theme-anim .sidebar, html.theme-anim .row, html.theme-anim .stat, html.theme-anim .inp, html.theme-anim .hero, html.theme-anim .jatah,
+html.theme-anim .bottomnav, html.theme-anim .icon-btn, html.theme-anim .seg, html.theme-anim .cat, html.theme-anim .sum3 > div, html.theme-anim .goal, html.theme-anim .opt, html.theme-anim .ang-row {
+  transition: background-color .6s ease, color .6s ease, border-color .6s ease, box-shadow .6s ease !important;
+}
+
+/* ---------- Halaman Tema ---------- */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 12px; }
+.sw, .bgt { position: relative; overflow: hidden; text-align: left; padding: 9px; border-radius: 22px; background: var(--surface2); box-shadow: inset 0 0 0 2.5px transparent; display: flex; flex-direction: column; gap: 8px; transition: transform .45s var(--spring), box-shadow .3s, background-color .3s; }
+.sw:hover, .bgt:hover { transform: translateY(-4px); }
+.sw.on, .bgt.on { box-shadow: inset 0 0 0 2.5px var(--primary); transform: translateY(-3px) scale(1.02); }
+.sw.on::after, .bgt.on::after { content: '✓'; position: absolute; top: 14px; right: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--primary); color: var(--on-primary); display: grid; place-items: center; font-size: .8rem; font-weight: 800; animation: popCheck .5s var(--spring) both; }
+.sw b, .bgt b { font-size: .82rem; padding: 0 4px 3px; }
+.sw-prev { position: relative; height: 66px; border-radius: 15px; background: var(--b); overflow: hidden; display: block; }
+.sw-prev i { position: absolute; border-radius: 50%; display: block; transition: transform .5s var(--spring); }
+.sw-prev .i1 { width: 62px; height: 62px; background: var(--p); left: -12px; top: -18px; }
+.sw-prev .i2 { width: 40px; height: 40px; background: var(--a); right: 6px; top: -10px; }
+.sw-prev .i3 { width: 18px; height: 18px; background: var(--k); right: 28px; bottom: 10px; }
+.sw:hover .i1 { transform: scale(1.18); } .sw:hover .i2 { transform: translate(-4px, 4px) scale(1.15); }
+.custom-col { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 16px; padding: 12px 14px; background: var(--surface2); border-radius: var(--r-s); }
+.cc { display: flex; align-items: center; gap: 10px; } .cc label { font-weight: 800; font-size: .84rem; }
+.custom-col .muted { font-size: .78rem; flex: 1; min-width: 150px; }
+.bgts { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 12px; }
+.bgt-prev { display: block; height: 70px; border-radius: 15px; background: var(--bg); position: relative; overflow: hidden; border: 1px solid var(--line); }
+.bp-bulat { background: radial-gradient(circle at 18% 22%, var(--blob1) 0 28%, transparent 29%), radial-gradient(circle at 88% 12%, var(--blob2) 0 30%, transparent 31%), radial-gradient(circle at 60% 98%, var(--blob3) 0 26%, transparent 27%), var(--bg); }
+.bp-gradien { background: linear-gradient(135deg, var(--blob1), var(--blob2), var(--blob3)); }
+.bp-aurora { background: radial-gradient(circle at 25% 30%, var(--aur1), transparent 55%), radial-gradient(circle at 80% 25%, var(--aur2), transparent 50%), radial-gradient(circle at 55% 95%, var(--aur3), transparent 55%), var(--bg); opacity: .8; }
+.bp-gelombang { background: radial-gradient(ellipse 80% 55% at 50% 118%, var(--blob1) 0 98%, transparent 100%), var(--bg); }
+.bp-titik { background: radial-gradient(var(--blob1) 2px, transparent 2.5px) 0 0 / 10px 10px, var(--bg); }
+.bp-polos { background: var(--bg); }
+.bp-foto { background: linear-gradient(160deg, #8fb4ff, #ffb6c1 60%, #ffe3a3); position: relative; }
+.bp-foto::after { content: '🖼️'; position: absolute; inset: 0; display: grid; place-items: center; font-size: 1.5rem; }

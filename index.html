@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Dill.KOST — Keuangan Anak Kost</title>
+  <meta name="description" content="Dill.Kost: aplikasi pencatat keuangan untuk anak kost. Saldo, pengeluaran harian, tagihan, tabungan, tema bisa diubah, dan bisa dipakai offline.">
+  <meta name="theme-color" content="#E3E4FF" id="metaTheme">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="KostKu">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="komponen.css">
+  <link rel="stylesheet" href="tema.css">
+  <link rel="stylesheet" href="animasi.css">
+  >
+  <script src="data.js"></script>
+  <script src="tema.js"></script>
+</head>
+<body>
+ 
+  <div id="bg" aria-hidden="true">
+    <span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="b b4"></span>
+    <div class="bg-foto"></div>
+    <svg class="bg-wave" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,224L60,213.3C120,203,240,181,360,181.3C480,181,600,203,720,218.7C840,235,960,245,1080,229.3C1200,213,1320,171,1380,149.3L1440,128L1440,320L0,320Z"/></svg>
+  </div>
+
+  <div id="loader" class="loader" aria-hidden="true"><div class="ld-dot"></div></div>
+
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Menu utama">
+      <div class="brand">
+        <img src="icon.svg" alt="" width="42" height="42">
+        <div><b>Dill.Kost</b><small>Keuangan anak kost kece</small></div>
+      </div>
+      <nav class="nav" id="nav" aria-label="Navigasi"></nav>
+      <a class="side-me" href="#/profil" id="sideMe"></a>
+    </aside>
+    <div class="side-scrim" id="sideScrim"></div>
+
+    <div class="main">
+      <div class="wrap">
+        <header class="topbar">
+          <button class="icon-btn menu-btn" id="menuBtn" type="button" data-act="menu" aria-label="Buka menu"></button>
+          <div class="tb-title">
+            <h1 id="pageTitle">Dashboard</h1>
+            <div class="sub" id="pageSub"></div>
+          </div>
+          <div class="tb-space"></div>
+          <span class="net" id="net" title="Status koneksi"><i></i><span>Online</span></span>
+          <button class="icon-btn" id="modeBtn" type="button" data-act="mode" aria-label="Ganti mode terang/gelap"></button>
+          <a class="icon-btn avatar-btn" id="topAvatar" href="#/profil" aria-label="Profil"></a>
+        </header>
+        <main id="view" class="view" tabindex="-1"></main>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottomnav" id="bottomnav" aria-label="Navigasi cepat"></nav>
+  <button class="fab" id="fab" type="button" data-act="trx-baru" aria-label="Catat transaksi baru">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+  </button>
+
+  <div id="modalRoot"></div>
+  <div id="toastRoot" aria-live="polite"></div>
+
+  <noscript><div style="padding:24px;font-family:sans-serif">Dill.Kost membutuhkan JavaScript. Aktifkan JavaScript di browser kamu.</div></noscript>
+
+  <script src="ikon.js"></script>
+  <script src="ui.js"></script>
+  <script src="hal-dashboard.js"></script>
+  <script src="hal-transaksi.js"></script>
+  <script src="hal-kost.js"></script>
+  <script src="hal-lain.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
